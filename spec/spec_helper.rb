@@ -6,7 +6,7 @@ RSpec.configure do |config|
 end
 
 # Disable logging for specs.
-Savon.log = false
+SavonZuora.log = false
 
 require "support/endpoint"
 require "support/fixture"

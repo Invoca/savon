@@ -2,11 +2,11 @@
 lib = File.expand_path("../lib", __FILE__)
 $:.unshift lib unless $:.include? lib
 
-require "savon/version"
+require "savon_zuora/version"
 
 Gem::Specification.new do |s|
-  s.name        = "savon"
-  s.version     = Savon::Version
+  s.name        = "savon_zuora"
+  s.version     = SavonZuora::Version
   s.authors     = "Daniel Harrington"
   s.email       = "me@rubiii.com"
   s.homepage    = "http://savonrb.com"
