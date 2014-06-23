@@ -1,6 +1,6 @@
 require "savon_zuora/error"
 
-module Savon
+module SavonZuora
   module SOAP
     # = SavonZuora::SOAP::InvalidResponseError
     #

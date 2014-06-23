@@ -1,4 +1,4 @@
-module Savon
+module SavonZuora
   module Hooks
 
     # = SavonZuora::Hooks::Hook

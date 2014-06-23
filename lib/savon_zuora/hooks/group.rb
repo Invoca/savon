@@ -1,6 +1,6 @@
 require "savon_zuora/hooks/hook"
 
-module Savon
+module SavonZuora
   module Hooks
 
     # = SavonZuora::Hooks::Group

@@ -1,6 +1,6 @@
 require "savon_zuora/soap"
 
-module Savon
+module SavonZuora
   module CoreExt
     module String
 
@@ -20,4 +20,4 @@ module Savon
   end
 end
 
-String.send :include, Savon::CoreExt::String
+String.send :include, SavonZuora::CoreExt::String

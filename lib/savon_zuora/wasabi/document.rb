@@ -1,7 +1,7 @@
 require "wasabi"
 require "httpi/request"
 
-module Savon
+module SavonZuora
   module Wasabi
 
     # = SavonZuora::Wasabi::Document
@@ -33,7 +33,7 @@ module Savon
           when /^http[s]?:/ then 
             response = HTTPI.get(request)
             if response.error?
-              raise Savon::HTTP::Error.new(response)
+              raise SavonZuora::HTTP::Error.new(response)
             else
               response.body
             end

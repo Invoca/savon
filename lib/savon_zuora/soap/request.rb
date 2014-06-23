@@ -1,7 +1,7 @@
 require "httpi"
 require "savon_zuora/soap/response"
 
-module Savon
+module SavonZuora
   module SOAP
 
     # = SavonZuora::SOAP::Request
@@ -29,7 +29,7 @@ module Savon
       # Executes the request and returns the response.
       def response
         @response ||= SOAP::Response.new(
-          Savon.hooks.select(:soap_request).call(self) || with_logging { HTTPI.post(http) }
+          SavonZuora.hooks.select(:soap_request).call(self) || with_logging { HTTPI.post(http) }
         )
       end
 
@@ -54,15 +54,15 @@ module Savon
 
       # Logs the SOAP request +url+, +headers+ and +body+.
       def log_request(url, headers, body)
-        Savon.log "SOAP request: #{url}"
-        Savon.log headers.map { |key, value| "#{key}: #{value}" }.join(", ")
-        Savon.log body, :filter
+        SavonZuora.log "SOAP request: #{url}"
+        SavonZuora.log headers.map { |key, value| "#{key}: #{value}" }.join(", ")
+        SavonZuora.log body, :filter
       end
 
       # Logs the SOAP response +code+ and +body+.
       def log_response(code, body)
-        Savon.log "SOAP response (status #{code}):"
-        Savon.log body
+        SavonZuora.log "SOAP response (status #{code}):"
+        SavonZuora.log body
       end
 
     end

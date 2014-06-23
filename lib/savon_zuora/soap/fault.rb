@@ -1,7 +1,7 @@
 require "savon_zuora/error"
 require "savon_zuora/soap/xml"
 
-module Savon
+module SavonZuora
   module SOAP
 
     # = SavonZuora::SOAP::Fault

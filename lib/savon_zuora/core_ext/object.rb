@@ -1,4 +1,4 @@
-module Savon
+module SavonZuora
   module CoreExt
     module Object
 
@@ -11,4 +11,4 @@ module Savon
   end
 end
 
-Object.send :include, Savon::CoreExt::Object
+Object.send :include, SavonZuora::CoreExt::Object

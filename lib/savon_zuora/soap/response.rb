@@ -3,7 +3,7 @@ require "savon_zuora/soap/fault"
 require "savon_zuora/soap/invalid_response_error"
 require "savon_zuora/http/error"
 
-module Savon
+module SavonZuora
   module SOAP
 
     # = SavonZuora::SOAP::Response
@@ -14,7 +14,7 @@ module Savon
       # Expects an <tt>HTTPI::Response</tt> and handles errors.
       def initialize(response)
         self.http = response
-        raise_errors if Savon.raise_errors?
+        raise_errors if SavonZuora.raise_errors?
       end
 
       attr_accessor :http
@@ -52,7 +52,7 @@ module Savon
       # Returns the SOAP response header as a Hash.
       def header
         if !hash.has_key? :envelope
-          raise Savon::SOAP::InvalidResponseError, "Unable to parse response body '#{to_xml}'"
+          raise SavonZuora::SOAP::InvalidResponseError, "Unable to parse response body '#{to_xml}'"
         end
         hash[:envelope][:header]
       end
@@ -60,7 +60,7 @@ module Savon
       # Returns the SOAP response body as a Hash.
       def body
         if !hash.has_key? :envelope
-          raise Savon::SOAP::InvalidResponseError, "Unable to parse response body '#{to_xml}'"
+          raise SavonZuora::SOAP::InvalidResponseError, "Unable to parse response body '#{to_xml}'"
         end
         hash[:envelope][:body]
       end
