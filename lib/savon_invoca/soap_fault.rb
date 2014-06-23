@@ -1,6 +1,6 @@
-require "savon"
+require "savon_invoca"
 
-module Savon
+module SavonInvoca
   class SOAPFault < Error
 
     def self.present?(http)

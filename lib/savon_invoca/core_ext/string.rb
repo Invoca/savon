@@ -1,11 +1,11 @@
-require "savon/soap"
+require "savon_invoca/soap"
 
-module Savon
+module SavonInvoca
   module CoreExt
     module String
 
       def self.included(base)
-        unless "savon".respond_to?(:snakecase)
+        unless "savon_invoca".respond_to?(:snakecase)
           base.send(:include, Extension)
         end
       end
@@ -27,4 +27,4 @@ module Savon
   end
 end
 
-String.send :include, Savon::CoreExt::String
+String.send :include, SavonInvoca::CoreExt::String

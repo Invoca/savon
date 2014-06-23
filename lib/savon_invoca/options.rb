@@ -1,7 +1,7 @@
 require "logger"
 require "httpi"
 
-module Savon
+module SavonInvoca
   class Options
 
     def initialize(options = {})
@@ -144,7 +144,7 @@ module Savon
       @options[:log] = log
     end
 
-    # The logger to use. Defaults to a Savon::Logger instance.
+    # The logger to use. Defaults to a SavonInvoca::Logger instance.
     def logger(logger)
       @options[:logger] = logger
     end
@@ -256,7 +256,7 @@ module Savon
       @options[:message] = message
     end
 
-    # SOAP message tag (formerly known as SOAP input tag). If it's not set, Savon retrieves the name from
+    # SOAP message tag (formerly known as SOAP input tag). If it's not set, SavonInvoca retrieves the name from
     # the WSDL document (if available). Otherwise, Gyoku converts the operation name into an XML element.
     def message_tag(message_tag)
       @options[:message_tag] = message_tag

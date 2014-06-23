@@ -11,4 +11,4 @@ rvm:
   - rbx-19mode
   - ree
 notifications:
-  irc: "irc.freenode.org#savon"
+  irc: "irc.freenode.org#savon_invoca"

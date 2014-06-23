@@ -1,6 +1,6 @@
 require "nokogiri"
 
-module Savon
+module SavonInvoca
   class LogMessage
 
     def initialize(message, filters = [], pretty_print = false)

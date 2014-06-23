@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Savon::Builder do
+describe SavonInvoca::Builder do
 
-  subject(:builder) { Savon::Builder.new(:authenticate, wsdl, globals, locals) }
+  subject(:builder) { SavonInvoca::Builder.new(:authenticate, wsdl, globals, locals) }
 
-  let(:globals)     { Savon::GlobalOptions.new }
-  let(:locals)      { Savon::LocalOptions.new }
+  let(:globals)     { SavonInvoca::GlobalOptions.new }
+  let(:locals)      { SavonInvoca::LocalOptions.new }
   let(:wsdl)        { Wasabi::Document.new Fixture.wsdl(:authentication) }
   let(:no_wsdl)     { Wasabi::Document.new }
 
@@ -40,8 +40,8 @@ describe Savon::Builder do
     it "includes a message tag created by Gyoku if both option and WSDL are missing" do
       globals[:namespace] = "http://v1.example.com"
 
-      locals = Savon::LocalOptions.new
-      builder = Savon::Builder.new(:authenticate, no_wsdl, globals, locals)
+      locals = SavonInvoca::LocalOptions.new
+      builder = SavonInvoca::Builder.new(:authenticate, no_wsdl, globals, locals)
 
       expect(builder.to_s).to include("<wsdl:authenticate>")
     end
@@ -58,7 +58,7 @@ describe Savon::Builder do
     it "uses the default :wsdl identifier if both option and WSDL were not specified" do
       globals[:namespace] = "http://v1.example.com"
 
-      builder = Savon::Builder.new(:authenticate, no_wsdl, globals, locals)
+      builder = SavonInvoca::Builder.new(:authenticate, no_wsdl, globals, locals)
       expect(builder.to_s).to include("<wsdl:authenticate>")
     end
 

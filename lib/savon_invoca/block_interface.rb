@@ -1,4 +1,4 @@
-module Savon
+module SavonInvoca
   class BlockInterface
 
     def initialize(target)

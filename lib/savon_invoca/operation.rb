@@ -1,11 +1,11 @@
-require "savon/options"
-require "savon/block_interface"
-require "savon/request"
-require "savon/builder"
-require "savon/response"
-require "savon/log_message"
+require "savon_invoca/options"
+require "savon_invoca/block_interface"
+require "savon_invoca/request"
+require "savon_invoca/builder"
+require "savon_invoca/response"
+require "savon_invoca/log_message"
 
-module Savon
+module SavonInvoca
   class Operation
 
     def self.create(operation_name, wsdl, globals)
@@ -44,7 +44,7 @@ module Savon
 
       builder = Builder.new(@name, @wsdl, @globals, @locals)
 
-      response = Savon.notify_observers(@name, builder, @globals, @locals)
+      response = SavonInvoca.notify_observers(@name, builder, @globals, @locals)
       response ||= call! build_request(builder)
 
       raise_expected_httpi_response! unless response.kind_of?(HTTPI::Response)

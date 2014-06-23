@@ -1,8 +1,8 @@
 require "spec_helper"
-require "savon/mock/spec_helper"
+require "savon_invoca/mock/spec_helper"
 
-describe "Savon's mock interface" do
-  include Savon::SpecHelper
+describe "SavonInvoca's mock interface" do
+  include SavonInvoca::SpecHelper
 
   before :all do
     savon.mock!
@@ -51,19 +51,19 @@ describe "Savon's mock interface" do
 
   it "fails when the expected operation was not called" do
     # TODO: find out how to test this! [dh, 2012-12-17]
-    #savon.expects(:authenticate)
+    #savon_invoca.expects(:authenticate)
   end
 
   it "fails when the return value for an expectation was not specified" do
     savon.expects(:authenticate)
 
     expect { new_client.call(:authenticate) }.
-      to raise_error(Savon::ExpectationError, "This expectation was not set up with a response.")
+      to raise_error(SavonInvoca::ExpectationError, "This expectation was not set up with a response.")
   end
 
   it "fails with an unexpected request" do
     expect { new_client.call(:authenticate) }.
-      to raise_error(Savon::ExpectationError, "Unexpected request to the :authenticate operation.")
+      to raise_error(SavonInvoca::ExpectationError, "Unexpected request to the :authenticate operation.")
   end
 
   it "fails with multiple requests" do
@@ -80,7 +80,7 @@ describe "Savon's mock interface" do
     new_client.call(:authenticate, :message => authentication_message)
 
     expect { new_client.call(:find_user, :message => find_user_message) }.
-      to raise_error(Savon::ExpectationError, "Expected a request to the :create_user operation.\n" \
+      to raise_error(SavonInvoca::ExpectationError, "Expected a request to the :create_user operation.\n" \
                                               "Received a request to the :find_user operation instead.")
   end
 
@@ -88,7 +88,7 @@ describe "Savon's mock interface" do
     savon.expects(:logout).returns("<fixture/>")
 
     expect { new_client.call(:authenticate) }.
-      to raise_error(Savon::ExpectationError, "Expected a request to the :logout operation.\n" \
+      to raise_error(SavonInvoca::ExpectationError, "Expected a request to the :logout operation.\n" \
                                               "Received a request to the :authenticate operation instead.")
   end
 
@@ -97,7 +97,7 @@ describe "Savon's mock interface" do
     savon.expects(:find_user).with(:message => message).returns("<fixture/>")
 
     expect { new_client.call(:find_user) }.
-      to raise_error(Savon::ExpectationError, "Expected a request to the :find_user operation\n" \
+      to raise_error(SavonInvoca::ExpectationError, "Expected a request to the :find_user operation\n" \
                                               "  with this message: #{message.inspect}\n" \
                                               "Received a request to the :find_user operation\n" \
                                               "  with no message.")
@@ -108,7 +108,7 @@ describe "Savon's mock interface" do
     message = { :username => "luke" }
 
     expect { new_client.call(:find_user, :message => message) }.
-      to raise_error(Savon::ExpectationError, "Expected a request to the :find_user operation\n" \
+      to raise_error(SavonInvoca::ExpectationError, "Expected a request to the :find_user operation\n" \
                                               "  with no message.\n" \
                                               "Received a request to the :find_user operation\n" \
                                               "  with this message: #{message.inspect}")
@@ -121,7 +121,7 @@ describe "Savon's mock interface" do
       :log       => false
     }
 
-    Savon.client defaults.merge(globals)
+    SavonInvoca.client defaults.merge(globals)
   end
 
 end

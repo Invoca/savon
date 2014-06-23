@@ -8,7 +8,7 @@ if ENV["COVERAGE"]
   end
 end
 
-require "savon"
+require "savon_invoca"
 require "rspec"
 
 RSpec.configure do |config|

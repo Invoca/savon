@@ -1,10 +1,10 @@
-require "savon/operation"
-require "savon/request"
-require "savon/options"
-require "savon/block_interface"
+require "savon_invoca/operation"
+require "savon_invoca/request"
+require "savon_invoca/options"
+require "savon_invoca/block_interface"
 require "wasabi"
 
-module Savon
+module SavonInvoca
   class Client
 
     def initialize(globals = {}, &block)
@@ -56,17 +56,17 @@ module Savon
 
     def raise_version1_initialize_error!(object)
       raise InitializationError,
-        "Some code tries to initialize Savon with the #{object.inspect} (#{object.class}) \n" \
-        "Savon 2 expects a Hash of options for creating a new client and executing requests.\n" \
+        "Some code tries to initialize SavonInvoca with the #{object.inspect} (#{object.class}) \n" \
+        "SavonInvoca 2 expects a Hash of options for creating a new client and executing requests.\n" \
         "Please read the updated documentation for version 2: http://savonrb.com/version2.html"
     end
 
     def raise_initialization_error!
       raise InitializationError,
             "Expected either a WSDL document or the SOAP endpoint and target namespace options.\n\n" \
-            "Savon.client(wsdl: '/Users/me/project/service.wsdl')                              # to use a local WSDL document\n" \
-            "Savon.client(wsdl: 'http://example.com?wsdl')                                     # to use a remote WSDL document\n" \
-            "Savon.client(endpoint: 'http://example.com', namespace: 'http://v1.example.com')  # if you don't have a WSDL document"
+            "SavonInvoca.client(wsdl: '/Users/me/project/service.wsdl')                              # to use a local WSDL document\n" \
+            "SavonInvoca.client(wsdl: 'http://example.com?wsdl')                                     # to use a remote WSDL document\n" \
+            "SavonInvoca.client(endpoint: 'http://example.com', namespace: 'http://v1.example.com')  # if you don't have a WSDL document"
     end
 
     def raise_missing_wsdl_error!

@@ -1,4 +1,4 @@
-module Savon
+module SavonInvoca
 
   Error                = Class.new(RuntimeError)
   InitializationError  = Class.new(Error)
@@ -20,6 +20,6 @@ module Savon
 
 end
 
-require "savon/version"
-require "savon/client"
-require "savon/model"
+require "savon_invoca/version"
+require "savon_invoca/client"
+require "savon_invoca/model"

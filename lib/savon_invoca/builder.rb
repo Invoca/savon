@@ -1,9 +1,9 @@
-require "savon/header"
-require "savon/message"
+require "savon_invoca/header"
+require "savon_invoca/message"
 require "builder"
 require "gyoku"
 
-module Savon
+module SavonInvoca
   class Builder
 
     SCHEMA_TYPES = {

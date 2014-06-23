@@ -1,8 +1,8 @@
 require "nori"
-require "savon/soap_fault"
-require "savon/http_error"
+require "savon_invoca/soap_fault"
+require "savon_invoca/http_error"
 
-module Savon
+module SavonInvoca
   class Response
 
     def initialize(http, globals, locals)

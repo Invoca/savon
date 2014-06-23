@@ -1,21 +1,21 @@
 require "spec_helper"
 
-describe Savon::HTTPError do
-  let(:http_error) { Savon::HTTPError.new new_response(:code => 404, :body => "Not Found") }
-  let(:no_error) { Savon::HTTPError.new new_response }
+describe SavonInvoca::HTTPError do
+  let(:http_error) { SavonInvoca::HTTPError.new new_response(:code => 404, :body => "Not Found") }
+  let(:no_error) { SavonInvoca::HTTPError.new new_response }
 
-  it "inherits from Savon::Error" do
-    expect(Savon::HTTPError.ancestors).to include(Savon::Error)
+  it "inherits from SavonInvoca::Error" do
+    expect(SavonInvoca::HTTPError.ancestors).to include(SavonInvoca::Error)
   end
 
   describe ".present?" do
     it "returns true if there was an HTTP error" do
       http = new_response(:code => 404, :body => "Not Found")
-      expect(Savon::HTTPError.present? http).to be_true
+      expect(SavonInvoca::HTTPError.present? http).to be_true
     end
 
     it "returns false unless there was an HTTP error" do
-      expect(Savon::HTTPError.present? new_response).to be_false
+      expect(SavonInvoca::HTTPError.present? new_response).to be_false
     end
   end
 

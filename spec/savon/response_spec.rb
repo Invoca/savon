@@ -1,25 +1,25 @@
 require "spec_helper"
 
-describe Savon::Response do
+describe SavonInvoca::Response do
 
-  let(:globals) { Savon::GlobalOptions.new }
-  let(:locals)  { Savon::LocalOptions.new }
+  let(:globals) { SavonInvoca::GlobalOptions.new }
+  let(:locals)  { SavonInvoca::LocalOptions.new }
 
   describe ".new" do
-    it "should raise a Savon::Fault in case of a SOAP fault" do
-      lambda { soap_fault_response }.should raise_error(Savon::SOAPFault)
+    it "should raise a SavonInvoca::Fault in case of a SOAP fault" do
+      lambda { soap_fault_response }.should raise_error(SavonInvoca::SOAPFault)
     end
 
-    it "should not raise a Savon::Fault in case the default is turned off" do
+    it "should not raise a SavonInvoca::Fault in case the default is turned off" do
       globals[:raise_errors] = false
-      lambda { soap_fault_response }.should_not raise_error(Savon::SOAPFault)
+      lambda { soap_fault_response }.should_not raise_error(SavonInvoca::SOAPFault)
     end
 
-    it "should raise a Savon::HTTP::Error in case of an HTTP error" do
-      lambda { soap_response :code => 500 }.should raise_error(Savon::HTTPError)
+    it "should raise a SavonInvoca::HTTP::Error in case of an HTTP error" do
+      lambda { soap_response :code => 500 }.should raise_error(SavonInvoca::HTTPError)
     end
 
-    it "should not raise a Savon::HTTP::Error in case the default is turned off" do
+    it "should not raise a SavonInvoca::HTTP::Error in case the default is turned off" do
       globals[:raise_errors] = false
       soap_response :code => 500
     end
@@ -72,7 +72,7 @@ describe Savon::Response do
     end
 
     it "should throw an exception when the response header isn't parsable" do
-      lambda { invalid_soap_response.header }.should raise_error Savon::InvalidResponseError
+      lambda { invalid_soap_response.header }.should raise_error SavonInvoca::InvalidResponseError
     end
   end
 
@@ -162,7 +162,7 @@ describe Savon::Response do
     response = defaults.merge options
     http_response = HTTPI::Response.new(response[:code], response[:headers], response[:body])
 
-    Savon::Response.new(http_response, globals, locals)
+    SavonInvoca::Response.new(http_response, globals, locals)
   end
 
   def soap_fault_response
@@ -178,7 +178,7 @@ describe Savon::Response do
     response = defaults.merge options
     http_response = HTTPI::Response.new(response[:code], response[:headers], response[:body])
 
-    Savon::Response.new(http_response, globals, locals)
+    SavonInvoca::Response.new(http_response, globals, locals)
   end
 
 end

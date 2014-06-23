@@ -1,6 +1,6 @@
 require "gyoku"
 
-module Savon
+module SavonInvoca
   class QualifiedMessage
 
     def initialize(types, used_namespaces, key_converter)

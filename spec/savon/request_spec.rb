@@ -1,18 +1,18 @@
 require "spec_helper"
 require "integration/support/server"
 
-describe Savon::WSDLRequest do
+describe SavonInvoca::WSDLRequest do
 
-  let(:globals)      { Savon::GlobalOptions.new }
+  let(:globals)      { SavonInvoca::GlobalOptions.new }
   let(:http_request) { HTTPI::Request.new }
 
   def new_wsdl_request
-    Savon::WSDLRequest.new(globals, http_request)
+    SavonInvoca::WSDLRequest.new(globals, http_request)
   end
 
   describe "#build" do
     it "returns an HTTPI::Request" do
-      wsdl_request = Savon::WSDLRequest.new(globals)
+      wsdl_request = SavonInvoca::WSDLRequest.new(globals)
       expect(wsdl_request.build).to be_an(HTTPI::Request)
     end
 
@@ -211,18 +211,18 @@ describe Savon::WSDLRequest do
 
 end
 
-describe Savon::SOAPRequest do
+describe SavonInvoca::SOAPRequest do
 
-  let(:globals)      { Savon::GlobalOptions.new }
+  let(:globals)      { SavonInvoca::GlobalOptions.new }
   let(:http_request) { HTTPI::Request.new }
 
   def new_soap_request
-    Savon::SOAPRequest.new(globals, http_request)
+    SavonInvoca::SOAPRequest.new(globals, http_request)
   end
 
   describe "#build" do
     it "returns an HTTPI::Request" do
-      soap_request = Savon::SOAPRequest.new(globals)
+      soap_request = SavonInvoca::SOAPRequest.new(globals)
       expect(soap_request.build).to be_an(HTTPI::Request)
     end
 

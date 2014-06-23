@@ -1,4 +1,4 @@
-module Savon
+module SavonInvoca
 
   VERSION = "2.1.0"
 

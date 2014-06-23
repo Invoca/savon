@@ -149,7 +149,7 @@ describe "Options" do
       expect(response.http.body).to include("<soapenv:Envelope")
     end
 
-    it "when not set, Savon defaults to use :env as the namespace identifier for the SOAP envelope" do
+    it "when not set, SavonInvoca defaults to use :env as the namespace identifier for the SOAP envelope" do
       client = new_client(:endpoint => @server.url(:repeat))
       response = client.call(:authenticate)
 
@@ -174,26 +174,26 @@ describe "Options" do
   end
 
   context "global: raise_errors" do
-    it "when true, instructs Savon to raise SOAP fault errors" do
+    it "when true, instructs SavonInvoca to raise SOAP fault errors" do
       client = new_client(:endpoint => @server.url(:repeat), :raise_errors => true)
 
       expect { client.call(:authenticate, :xml => Fixture.response(:soap_fault)) }.
-        to raise_error(Savon::SOAPFault)
+        to raise_error(SavonInvoca::SOAPFault)
 
       begin
         client.call(:authenticate, :xml => Fixture.response(:soap_fault))
-      rescue Savon::SOAPFault => soap_fault
+      rescue SavonInvoca::SOAPFault => soap_fault
         # check whether the configured nori instance is used by the soap fault
         expect(soap_fault.to_hash[:fault][:faultcode]).to eq("soap:Server")
       end
     end
 
-    it "when true, instructs Savon to raise HTTP errors" do
+    it "when true, instructs SavonInvoca to raise HTTP errors" do
       client = new_client(:endpoint => @server.url(404), :raise_errors => true)
-      expect { client.call(:authenticate) }.to raise_error(Savon::HTTPError)
+      expect { client.call(:authenticate) }.to raise_error(SavonInvoca::HTTPError)
     end
 
-    it "when false, instructs Savon to not raise SOAP fault errors" do
+    it "when false, instructs SavonInvoca to not raise SOAP fault errors" do
       client = new_client(:endpoint => @server.url(:repeat), :raise_errors => false)
       response = client.call(:authenticate, :xml => Fixture.response(:soap_fault))
 
@@ -201,7 +201,7 @@ describe "Options" do
       expect(response).to be_a_soap_fault
     end
 
-    it "when false, instructs Savon to not raise HTTP errors" do
+    it "when false, instructs SavonInvoca to not raise HTTP errors" do
       client = new_client(:endpoint => @server.url(404), :raise_errors => false)
       response = client.call(:authenticate)
 
@@ -211,7 +211,7 @@ describe "Options" do
   end
 
   context "global :log" do
-    it "instructs Savon not to log SOAP requests and responses" do
+    it "instructs SavonInvoca not to log SOAP requests and responses" do
       stdout = mock_stdout {
         client = new_client(:endpoint => @server.url, :log => false)
         client.call(:authenticate)
@@ -225,7 +225,7 @@ describe "Options" do
       new_client(:log => false)
     end
 
-    it "instructs Savon to log SOAP requests and responses" do
+    it "instructs SavonInvoca to log SOAP requests and responses" do
       stdout = mock_stdout {
         client = new_client(:endpoint => @server.url, :log => true)
         client.call(:authenticate)
@@ -509,7 +509,7 @@ describe "Options" do
       response = client.call(:authenticate, :xml => Fixture.response(:authentication))
 
       # the header/body convenience methods fails when conventions are not met. [dh, 2012-12-12]
-      expect { response.body }.to raise_error(Savon::InvalidResponseError)
+      expect { response.body }.to raise_error(SavonInvoca::InvalidResponseError)
 
       expect(response.hash["soap:envelope"]["soap:body"]).to include("ns2:authenticate_response")
     end
@@ -545,7 +545,7 @@ describe "Options" do
     end
 
     it "accepts a block in the block-based interface" do
-      client = Savon.client do |globals|
+      client = SavonInvoca.client do |globals|
         globals.log                      false
         globals.wsdl                     Fixture.wsdl(:authentication)
         globals.endpoint                 @server.url(:repeat)
@@ -566,13 +566,13 @@ describe "Options" do
       expect(response.http.body).to include("<tns:doAuthenticate></tns:doAuthenticate>")
     end
 
-    it "without it, Savon tries to get the message tag from the WSDL document" do
+    it "without it, SavonInvoca tries to get the message tag from the WSDL document" do
       response = new_client(:endpoint => @server.url(:repeat)).call(:authenticate)
       expect(response.http.body).to include("<tns:authenticate></tns:authenticate>")
     end
 
-    it "without the option and a WSDL, Savon defaults to Gyoku to create the name" do
-      client = Savon.client(:endpoint => @server.url(:repeat), :namespace => "http://v1.example.com", :log => false)
+    it "without the option and a WSDL, SavonInvoca defaults to Gyoku to create the name" do
+      client = SavonInvoca.client(:endpoint => @server.url(:repeat), :namespace => "http://v1.example.com", :log => false)
 
       response = client.call(:init_authentication)
       expect(response.http.body).to include("<wsdl:initAuthentication></wsdl:initAuthentication>")
@@ -589,7 +589,7 @@ describe "Options" do
   end
 
   context "request: soap_action" do
-    it "without it, Savon tries to get the SOAPAction from the WSDL document and falls back to Gyoku" do
+    it "without it, SavonInvoca tries to get the SOAPAction from the WSDL document and falls back to Gyoku" do
       client = new_client(:endpoint => @server.url(:inspect_request))
 
       response = client.call(:authenticate)
@@ -669,12 +669,12 @@ describe "Options" do
 
   def new_client(globals = {}, &block)
     globals = { :wsdl => Fixture.wsdl(:authentication), :log => false }.merge(globals)
-    Savon.client(globals, &block)
+    SavonInvoca.client(globals, &block)
   end
 
   def new_client_without_wsdl(globals = {}, &block)
     globals = { :log => false }.merge(globals)
-    Savon.client(globals, &block)
+    SavonInvoca.client(globals, &block)
   end
 
   def inspect_request(response)

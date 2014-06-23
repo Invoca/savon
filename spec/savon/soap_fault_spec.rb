@@ -1,15 +1,15 @@
 require "spec_helper"
 
-describe Savon::SOAPFault do
-  let(:soap_fault) { Savon::SOAPFault.new new_response(:body => Fixture.response(:soap_fault)), nori }
-  let(:soap_fault2) { Savon::SOAPFault.new new_response(:body => Fixture.response(:soap_fault12)), nori }
-  let(:another_soap_fault) { Savon::SOAPFault.new new_response(:body => Fixture.response(:another_soap_fault)), nori }
-  let(:no_fault) { Savon::SOAPFault.new new_response, nori }
+describe SavonInvoca::SOAPFault do
+  let(:soap_fault) { SavonInvoca::SOAPFault.new new_response(:body => Fixture.response(:soap_fault)), nori }
+  let(:soap_fault2) { SavonInvoca::SOAPFault.new new_response(:body => Fixture.response(:soap_fault12)), nori }
+  let(:another_soap_fault) { SavonInvoca::SOAPFault.new new_response(:body => Fixture.response(:another_soap_fault)), nori }
+  let(:no_fault) { SavonInvoca::SOAPFault.new new_response, nori }
 
   let(:nori) { Nori.new(:strip_namespaces => true, :convert_tags_to => lambda { |tag| tag.snakecase.to_sym }) }
 
-  it "inherits from Savon::Error" do
-    expect(Savon::SOAPFault.ancestors).to include(Savon::Error)
+  it "inherits from SavonInvoca::Error" do
+    expect(SavonInvoca::SOAPFault.ancestors).to include(SavonInvoca::Error)
   end
 
   describe "#http" do
@@ -21,21 +21,21 @@ describe Savon::SOAPFault do
   describe ".present?" do
     it "returns true if the HTTP response contains a SOAP 1.1 fault" do
       http = new_response(:body => Fixture.response(:soap_fault))
-      expect(Savon::SOAPFault.present? http).to be_true
+      expect(SavonInvoca::SOAPFault.present? http).to be_true
     end
 
     it "returns true if the HTTP response contains a SOAP 1.2 fault" do
       http = new_response(:body => Fixture.response(:soap_fault12))
-      expect(Savon::SOAPFault.present? http).to be_true
+      expect(SavonInvoca::SOAPFault.present? http).to be_true
     end
 
     it "returns true if the HTTP response contains a SOAP fault with different namespaces" do
       http = new_response(:body => Fixture.response(:another_soap_fault))
-      expect(Savon::SOAPFault.present? http).to be_true
+      expect(SavonInvoca::SOAPFault.present? http).to be_true
     end
 
     it "returns false unless the HTTP response contains a SOAP fault" do
-      expect(Savon::SOAPFault.present? new_response).to be_false
+      expect(SavonInvoca::SOAPFault.present? new_response).to be_false
     end
   end
 

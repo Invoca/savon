@@ -3,9 +3,9 @@ require "integration/support/server"
 require "json"
 require "ostruct"
 
-describe Savon::Operation do
+describe SavonInvoca::Operation do
 
-  let(:globals) { Savon::GlobalOptions.new(:endpoint => @server.url(:repeat), :log => false) }
+  let(:globals) { SavonInvoca::GlobalOptions.new(:endpoint => @server.url(:repeat), :log => false) }
   let(:wsdl)    { Wasabi::Document.new Fixture.wsdl(:taxcloud) }
 
   let(:no_wsdl) {
@@ -18,7 +18,7 @@ describe Savon::Operation do
   }
 
   def new_operation(operation_name, wsdl, globals)
-    Savon::Operation.create(operation_name, wsdl, globals)
+    SavonInvoca::Operation.create(operation_name, wsdl, globals)
   end
 
   before :all do
@@ -32,7 +32,7 @@ describe Savon::Operation do
   describe ".create with a WSDL" do
     it "returns a new operation" do
       operation = new_operation(:verify_address, wsdl, globals)
-      expect(operation).to be_a(Savon::Operation)
+      expect(operation).to be_a(SavonInvoca::Operation)
     end
 
     it "raises if the operation name is not a Symbol" do
@@ -49,14 +49,14 @@ describe Savon::Operation do
   describe ".create without a WSDL" do
     it "returns a new operation" do
       operation = new_operation(:verify_address, no_wsdl, globals)
-      expect(operation).to be_a(Savon::Operation)
+      expect(operation).to be_a(SavonInvoca::Operation)
     end
   end
 
   describe "#call" do
     it "returns a response object" do
       operation = new_operation(:verify_address, wsdl, globals)
-      expect(operation.call).to be_a(Savon::Response)
+      expect(operation.call).to be_a(SavonInvoca::Response)
     end
 
     it "uses the global :endpoint option for the request" do
@@ -73,7 +73,7 @@ describe Savon::Operation do
     end
 
     it "falls back to use the WSDL's endpoint if the :endpoint option was not set" do
-      globals_without_endpoint = Savon::GlobalOptions.new(:log => false)
+      globals_without_endpoint = SavonInvoca::GlobalOptions.new(:log => false)
       HTTPI::Request.any_instance.expects(:url=).with(wsdl.endpoint)
 
       operation = new_operation(:verify_address, wsdl, globals_without_endpoint)
@@ -89,7 +89,7 @@ describe Savon::Operation do
       # XXX: probably the worst spec ever written. refactor! [dh, 2013-01-05]
       http_request = HTTPI::Request.new
       http_request.headers.expects(:[]=).with("Content-Length", "312")
-      Savon::SOAPRequest.any_instance.expects(:build).returns(http_request)
+      SavonInvoca::SOAPRequest.any_instance.expects(:build).returns(http_request)
 
       new_operation(:verify_address, wsdl, globals).call
     end

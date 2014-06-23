@@ -1,7 +1,7 @@
 require "spec_helper"
 require "integration/support/server"
 
-describe Savon::Model do
+describe SavonInvoca::Model do
 
   before :all do
     @server = IntegrationServer.run
@@ -14,26 +14,26 @@ describe Savon::Model do
   describe ".client" do
     it "returns the memoized client" do
       model = Class.new {
-        extend Savon::Model
+        extend SavonInvoca::Model
         client :wsdl => Fixture.wsdl(:authentication)
       }
 
-      expect(model.client).to be_a(Savon::Client)
+      expect(model.client).to be_a(SavonInvoca::Client)
       expect(model.client).to equal(model.client)
     end
 
     it "raises if the client was not initialized properly" do
-      model = Class.new { extend Savon::Model }
+      model = Class.new { extend SavonInvoca::Model }
 
       expect { model.client }.
-        to raise_error(Savon::InitializationError, /^Expected the model to be initialized/)
+        to raise_error(SavonInvoca::InitializationError, /^Expected the model to be initialized/)
     end
   end
 
   describe ".global" do
     it "sets global options" do
       model = Class.new {
-        extend Savon::Model
+        extend SavonInvoca::Model
 
         client :wsdl => Fixture.wsdl(:authentication)
 
@@ -52,7 +52,7 @@ describe Savon::Model do
     subject(:model)
     it "defines class methods for each operation" do
       model = Class.new {
-        extend Savon::Model
+        extend SavonInvoca::Model
 
         client :wsdl => Fixture.wsdl(:authentication)
         operations :authenticate
@@ -65,7 +65,7 @@ describe Savon::Model do
       repeat_url = @server.url(:repeat)
 
       model = Class.new {
-        extend Savon::Model
+        extend SavonInvoca::Model
 
         client :endpoint => repeat_url, :namespace => "http://v1.example.com"
         global :log, false
@@ -79,7 +79,7 @@ describe Savon::Model do
 
     it "defines instance methods for each operation" do
       model = Class.new {
-        extend Savon::Model
+        extend SavonInvoca::Model
 
         client :wsdl => Fixture.wsdl(:authentication)
         operations :authenticate
@@ -93,7 +93,7 @@ describe Savon::Model do
       repeat_url = @server.url(:repeat)
 
       model = Class.new {
-        extend Savon::Model
+        extend SavonInvoca::Model
 
         client :endpoint => repeat_url, :namespace => "http://v1.example.com"
         global :log, false
@@ -111,7 +111,7 @@ describe Savon::Model do
     repeat_url = @server.url(:repeat)
 
     model = Class.new {
-      extend Savon::Model
+      extend SavonInvoca::Model
       client :endpoint => repeat_url, :namespace => "http://v1.example.com"
     }
 
@@ -133,7 +133,7 @@ describe Savon::Model do
     repeat_url = @server.url(:repeat)
 
     model = Class.new {
-      extend Savon::Model
+      extend SavonInvoca::Model
       client :endpoint => repeat_url, :namespace => "http://v1.example.com"
     }
 

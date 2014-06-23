@@ -1,7 +1,7 @@
 require "akami"
 require "gyoku"
 
-module Savon
+module SavonInvoca
   class Header
 
     def initialize(globals, locals)

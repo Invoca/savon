@@ -1,16 +1,16 @@
-require "savon/mock"
+require "savon_invoca/mock"
 
-module Savon
+module SavonInvoca
   module SpecHelper
 
     class Interface
 
       def mock!
-        Savon.observers << self
+        SavonInvoca.observers << self
       end
 
       def unmock!
-        Savon.observers.clear
+        SavonInvoca.observers.clear
       end
 
       def expects(operation_name)
