@@ -10,4 +10,4 @@ tmp
 .bundle
 Gemfile.lock
 .idea
-.ruby_version
+.ruby-version
