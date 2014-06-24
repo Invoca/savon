@@ -81,7 +81,7 @@ module SavonZuora
 
       # Returns the complete SOAP response XML without normalization.
       def hash
-        @hash ||= Nori.parse(to_xml)
+        @hash ||= NoriSavon.parse(to_xml)
       end
 
       # Returns the SOAP response XML.

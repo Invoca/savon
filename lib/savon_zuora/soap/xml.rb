@@ -1,10 +1,10 @@
 require "builder"
 require "gyoku"
-require "nori"
+require "nori_savon"
 
 require "savon_zuora/soap"
 
-Nori.configure do |config|
+NoriSavon.configure do |config|
   config.strip_namespaces = true
   config.convert_tags_to { |tag| tag.snakecase.to_sym }
 end
