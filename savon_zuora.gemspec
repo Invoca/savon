@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "builder",     ">= 2.1.2"
   s.add_dependency "nori_savon",  "1.1.5"
-  s.add_dependency "httpi",       "~> 2.0.2"
+  s.add_dependency "httpi",       "~> 1.1.0"
   # s.add_dependency "wasabi",      "~> 2.1"
   s.add_dependency "wasabi",      "~> 3.0.0"
   s.add_dependency "akami",       "~> 1.0"
