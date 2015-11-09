@@ -1,15 +1,26 @@
 require "builder"
 require "gyoku"
-require "nori_savon"
+require "nori"
 
 require "savon_zuora/soap"
 
-NoriSavon.configure do |config|
-  config.strip_namespaces = true
-  config.convert_tags_to { |tag| tag.snakecase.to_sym }
-end
-
 module SavonZuora
+  module NoriLoader
+    def self.included(base)
+      class << base
+        private
+
+        def nori
+          nori_options = {
+            :strip_namespaces => true,
+            :convert_tags_to => lambda { |tag| tag.snakecase.to_sym }
+          }
+          @nori ||= Nori.new(nori_options)
+        end
+      end
+    end
+  end
+
   module SOAP
 
     # = SavonZuora::SOAP::XML
