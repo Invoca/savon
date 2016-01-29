@@ -6,18 +6,15 @@ require "savon_zuora/soap"
 
 module SavonZuora
   module NoriLoader
-    def self.included(base)
-      class << base
-        private
 
-        def nori
-          nori_options = {
-            :strip_namespaces => true,
-            :convert_tags_to => lambda { |tag| tag.snakecase.to_sym }
-          }
-          @nori ||= Nori.new(nori_options)
-        end
-      end
+    private
+
+    def nori
+      nori_options = {
+        :strip_namespaces => true,
+        :convert_tags_to => lambda { |tag| tag.snakecase.to_sym }
+      }
+      @nori ||= Nori.new(nori_options)
     end
   end
 
