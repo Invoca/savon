@@ -32,11 +32,14 @@ class Fixture
     end
 
     def nori
-      nori_options = {
+      @nori ||= Nori.new(nori_options)
+    end
+
+    def nori_options
+      {
         :strip_namespaces => true,
         :convert_tags_to => lambda { |tag| tag.snakecase.to_sym }
       }
-      @nori ||= Nori.new(nori_options)
     end
 
   end
