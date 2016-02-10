@@ -1,3 +1,9 @@
+## 0.9.10 (2016-02-10)
+
+* Improvement/Fix: Updated SavonZuora to use the version 3.4 of [Wasabi](http://rubygems.org/gems/wasabi).
+* Improvement/Fix: Updated SavonZuora to use the version 2.3 of [HTTPI](http://rubygems.org/gems/httpi).
+* Improvement/Fix: Updated SavonZuora to use the version 2.4 of [Nori](http://rubygems.org/gems/nori).
+
 ## 0.9.9 (2012-02-17)
 
 * Improvement: [pull request 255](https://github.com/rubiii/savon/pull/255) - Raise an error if fetching
