@@ -10,7 +10,7 @@ class Fixture
 
     def response_hash(fixture)
       @response_hash ||= {}
-      @response_hash[fixture] ||= NoriSavon.parse(response(fixture))[:envelope][:body]
+      @response_hash[fixture] ||= nori.parse(response(fixture))[:envelope][:body]
     end
 
     TYPES.each do |type, ext|
@@ -29,6 +29,17 @@ class Fixture
       raise ArgumentError, "Unable to load: #{path}" unless File.exist? path
 
       File.read path
+    end
+
+    def nori
+      @nori ||= Nori.new(nori_options)
+    end
+
+    def nori_options
+      {
+        :strip_namespaces => true,
+        :convert_tags_to => lambda { |tag| tag.snakecase.to_sym }
+      }
     end
 
   end

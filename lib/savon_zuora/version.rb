@@ -1,5 +1,5 @@
 module SavonZuora
 
-  Version = "0.9.9"
+  Version = "0.9.10"
 
 end

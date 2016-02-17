@@ -9,6 +9,8 @@ module SavonZuora
     # Represents a SOAP fault. Contains the original <tt>HTTPI::Response</tt>.
     class Fault < Error
 
+      include NoriLoader
+
       # Expects an <tt>HTTPI::Response</tt>.
       def initialize(http)
         self.http = http
@@ -30,7 +32,7 @@ module SavonZuora
 
       # Returns the SOAP response body as a Hash.
       def to_hash
-        @hash ||= NoriSavon.parse(http.body)[:envelope][:body]
+        @hash ||= nori.parse(http.body)[:envelope][:body]
       end
 
     private

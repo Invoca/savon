@@ -11,6 +11,8 @@ module SavonZuora
     # Represents the SOAP response and contains the HTTP response.
     class Response
 
+      include NoriLoader
+
       # Expects an <tt>HTTPI::Response</tt> and handles errors.
       def initialize(response)
         self.http = response
@@ -81,7 +83,7 @@ module SavonZuora
 
       # Returns the complete SOAP response XML without normalization.
       def hash
-        @hash ||= NoriSavon.parse(to_xml)
+        @hash ||= nori.parse(to_xml)
       end
 
       # Returns the SOAP response XML.
