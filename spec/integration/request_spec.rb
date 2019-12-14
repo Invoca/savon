@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Integration" do
 
   subject(:client) {
-    client = Savon.client(service_endpoint)
+    client = SavonZuora.client(service_endpoint)
     client.http.open_timeout = 10
     client.http.read_timeout = 10
     client

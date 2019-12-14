@@ -1,28 +1,28 @@
-Savon [![Build Status](https://secure.travis-ci.org/rubiii/savon.png?branch=master)](http://travis-ci.org/rubiii/savon)
+SavonZuora [![Build Status](https://secure.travis-ci.org/rubiii/savon_zuora.png?branch=master)](http://travis-ci.org/rubiii/savon_zuora)
 =====
 
 Heavy metal SOAP client
 
-[Documentation](http://savonrb.com) | [RDoc](http://rubydoc.info/gems/savon) |
-[Mailing list](https://groups.google.com/forum/#!forum/savonrb) | [Twitter](http://twitter.com/savonrb)
+[Documentation](http://savon_zuorarb.com) | [RDoc](http://rubydoc.info/gems/savon_zuora) |
+[Mailing list](https://groups.google.com/forum/#!forum/savon_zuorarb) | [Twitter](http://twitter.com/savon_zuorarb)
 
 Installation
 ------------
 
-Savon is available through [Rubygems](http://rubygems.org/gems/savon) and can be installed via:
+SavonZuora is available through [Rubygems](http://rubygems.org/gems/savon_zuora) and can be installed via:
 
 ```
-$ gem install savon
+$ gem install savon_zuora
 ```
 
 Introduction
 ------------
 
 ``` ruby
-require "savon"
+require "savon_zuora"
 
 # create a client for your SOAP service
-client = Savon.client("http://service.example.com?wsdl")
+client = SavonZuora.client("http://service.example.com?wsdl")
 
 client.wsdl.soap_actions
 # => [:create_user, :get_user, :get_all_users]
@@ -39,4 +39,4 @@ response.body
 Documentation
 -------------
 
-Continue reading at [savonrb.com](http://savonrb.com)
+Continue reading at [savon_zuorarb.com](http://savon_zuorarb.com)
