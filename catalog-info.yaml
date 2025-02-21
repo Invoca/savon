@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: savon
+  tags:
+    - ruby
+    - gem
+    - public
+  annotations:
+    github.com/project-slug: Invoca/savon
+spec:
+  type: library
+  lifecycle: production
+  owner: octothorpe
